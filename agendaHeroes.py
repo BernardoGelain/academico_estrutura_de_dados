@@ -67,7 +67,6 @@ def main():
     agenda = AgendaHeroes()
 
     while True:
-        # Menu interativo para escolher as opções.
         print("Menu:")
         print("1. Adicionar contato")
         print("2. Buscar contato")
@@ -76,3 +75,45 @@ def main():
         print("5. Importar contatos do arquivo")
         print("6. Exportar contatos para o arquivo")
         print("7. Sair")
+
+        choice = int(input("Escolha uma opção: "))
+
+        if choice == 1:
+            name = input("Nome do super-herói: ")
+            contact = input("Informações de contato: ")
+            agenda.add_contact(Superhero(name, contact))
+        elif choice == 2:
+            name = input("Nome do super-herói para busca: ")
+            result = agenda.search_contact(name)
+            if result:
+                for hero in result:
+                    print(f"Nome: {hero.name}, Contato: {hero.contact}")
+            else:
+                print("Nenhum contato encontrado.")
+        elif choice == 3:
+            letter = input("Digite uma letra para listar contatos: ")
+            contacts = agenda.list_contacts_by_letter(letter)
+            if contacts:
+                print("Contatos:")
+                for contact in contacts:
+                    print(contact)
+            else:
+                print("Nenhum contato encontrado.")
+        elif choice == 4:
+            name = input("Nome do super-herói para remover: ")
+            agenda.remove_contact(name)
+        elif choice == 5:
+            filename = input("Nome do arquivo para importação: ")
+            agenda.import_contacts_from_file(filename)
+        elif choice == 6:
+            filename = input("Nome do arquivo para exportação: ")
+            agenda.export_contacts_to_file(filename)
+        elif choice == 7:
+            print("Encerrando o programa.")
+            break
+        else:
+            print("Opção inválida. Escolha uma opção válida.")
+
+
+if __name__ == "__main__":
+    main()
